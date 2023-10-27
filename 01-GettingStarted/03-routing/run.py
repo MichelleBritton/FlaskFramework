@@ -4,7 +4,7 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
+# The route decorator bind the indexd() function to itself so that whnever that route is called, the function is called, the function is also called a view
 @app.route("/")
 def index():
     return render_template("index.html")

@@ -1,14 +1,18 @@
 import os
 import json
+# Import the Flask class, capital F indicated that is's a class name
 from flask import Flask, render_template, request, flash
 if os.path.exists("env.py"):
     import env
 
-
+# Create an instance of this class, the convention is that our variable is called app
+# The first argument of the Flask class is the name of the application's module - our package
+# Since we are using a single module, we can use __name__ which is a built in Python module
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
-
+# Flask n eeds to know where to look for templates and static files. Use the route decorator to tell Flask what URL should trigger the function that follows
+# In Python a decorator starts with the @ symbol which is also called pie-notation. A decorator is a way of wrapping functions
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -45,7 +49,8 @@ def contact():
 def careers():
     return render_template("careers.html", page_title="Careers")
 
-
+# Use os module from the standard library to get the "IP" environment variable if it exists but set a default if it's not.
+# The word 'main' wrapped in double-underscores (__main__) is the name of the default module in Python.
 if __name__ == "__main__":
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
